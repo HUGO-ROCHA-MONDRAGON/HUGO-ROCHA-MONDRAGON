@@ -6,7 +6,7 @@ Sub AverageByTicker()
     Dim ws As Worksheet, wsResult As Worksheet
     Dim tickerDict As Object
     Dim lastRow As Long, i As Long
-    Dim ticker As String
+    Dim ticker As Variant
     Dim sumDict As Object, countDict As Object
 
     ' Initialize
@@ -37,12 +37,13 @@ Sub AverageByTicker()
     wsResult.Cells(1, 1).Value = "Ticker"
     wsResult.Cells(1, 2).Value = "Average AW"
     
+    Dim key As Variant
     Dim rowIndex As Long: rowIndex = 2
-    For Each ticker In tickerDict.Keys
-        wsResult.Cells(rowIndex, 1).Value = ticker
-        wsResult.Cells(rowIndex, 2).Value = sumDict(ticker) / countDict(ticker)
+    For Each key In tickerDict.Keys
+        wsResult.Cells(rowIndex, 1).Value = key
+        wsResult.Cells(rowIndex, 2).Value = sumDict(key) / countDict(key)
         rowIndex = rowIndex + 1
-    Next ticker
+    Next key
     
     MsgBox "Averages calculated and displayed in a new sheet!", vbInformation
 End Sub
